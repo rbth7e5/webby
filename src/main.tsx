@@ -13,10 +13,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/product/:id" element={<ProductDetailPage />}/>
-        </Routes>
+        <App/>
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>
