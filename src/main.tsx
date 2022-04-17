@@ -5,7 +5,7 @@ import App from "./App";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProductDetailPage from "./ProductDetailPage";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -13,7 +13,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
-        <App/>
+        <App />
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>

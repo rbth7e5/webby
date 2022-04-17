@@ -1,6 +1,6 @@
 export enum Currency {
-  SGD = 'SGD',
-  MYR = 'MYR'
+  SGD = "SGD",
+  MYR = "MYR",
 }
 
 export type Product = {
@@ -9,4 +9,4 @@ export type Product = {
   price: number;
   image: string;
   description: string;
-}
+};

@@ -1,6 +1,6 @@
-import {useEffect, useState} from "react";
-import {Product} from "../types";
-import {MOCK_PRODUCTS} from "../utils";
+import { useEffect, useState } from "react";
+import { Product } from "../types";
+import { MOCK_PRODUCTS } from "../utils";
 
 export default function useProducts() {
   const [products, setProducts] = useState<Product[]>([]);
