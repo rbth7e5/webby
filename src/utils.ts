@@ -90,6 +90,9 @@ export const getStoreId = (currency: Currency): string => {
 };
 
 export const getAmount = (currency: Currency, price: number): number => {
+  if (price < 0) {
+    throw new Error("Price cannot be negative");
+  }
   switch (currency) {
     case Currency.SGD:
       return price / 100;
