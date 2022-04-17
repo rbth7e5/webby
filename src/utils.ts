@@ -59,8 +59,9 @@ export const MOCK_PRODUCTS: Product[] = [
   },
 ]
 
+const EXCHANGE_RATE = 3.1;
+
 export const renderPrice = (price: number, currency: Currency): string => {
-  const EXCHANGE_RATE = 3.1;
   switch (currency) {
     case Currency.MYR:
       return `MYR ${price / 100 * EXCHANGE_RATE}`;
@@ -69,4 +70,46 @@ export const renderPrice = (price: number, currency: Currency): string => {
     default:
       return `SGD ${price / 100}`;
   }
+}
+
+export const getStoreId = (currency: Currency): string => {
+  switch (currency) {
+    case Currency.SGD:
+      return 'SG-S-NPQPBAWN2N6J';
+    case Currency.MYR:
+      return 'MY-S-3B7VWDJVBTDR';
+    default:
+      return 'SG-S-NPQPBAWN2N6J'
+  }
+}
+
+export const getAmount = (currency: Currency, price: number): number => {
+  switch (currency) {
+    case Currency.SGD:
+      return price / 100;
+    case Currency.MYR:
+      return price * EXCHANGE_RATE / 100;
+    default:
+      return price / 100;
+  }
+}
+
+export const postData = async (url: string, data: object) => {
+  const API_KEY = sessionStorage.getItem('key');
+  if (!API_KEY) {
+    throw new Error('Unauthorised. Please try again later.')
+  }
+  console.log({data});
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${API_KEY}`
+    },
+    body: JSON.stringify(data)
+  })
+  if (response.status !== 200) {
+    throw new Error('Checkout failed. Please try again later.')
+  }
+  return response.json();
 }
