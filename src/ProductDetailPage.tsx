@@ -1,45 +1,26 @@
 import { useParams } from "react-router-dom";
 import useProduct from "./hooks/useProduct";
-import Alert from "@mui/material/Alert";
+import Alert, {AlertColor} from "@mui/material/Alert";
 import Container from "@mui/material/Container";
 import Snackbar from "@mui/material/Snackbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { getAmount, getStoreId, postData, renderPrice } from "./utils";
+import {checkout, renderPrice} from "./utils";
 import { CurrencyContext } from "./App";
 import { useCallback, useContext, useState } from "react";
 
 export default function ProductDetailPage() {
-  const [message, setMessage] = useState<string | null>(null);
+  const [message, setMessage] = useState<{message: string, severity: AlertColor} | null>(null);
   const urlParams = useParams();
   const product = useProduct(urlParams.id ? +urlParams.id : undefined);
   const currency = useContext(CurrencyContext);
   const onCheckout = useCallback(async () => {
-    if (product === undefined) {
-      return;
-    }
-    try {
-      const apiKey = prompt(`Please enter api key for ${currency}`);
-      const { success, data, message } = await postData(
-        "https://api.uat.ablr.com/api/v2/public/merchant/checkout/",
-        {
-          store_id: getStoreId(currency),
-          amount: getAmount(currency, product.price),
-        },
-        apiKey
-      );
-      if (success) {
-        const { checkout_url } = data;
-        window.location.href = checkout_url;
-      } else {
-        if (message) {
-          setMessage(message);
-        } else {
-          setMessage("Failed to checkout. Please try again later.");
-        }
-      }
-    } catch (error: any) {
-      setMessage(error.message);
+    const {message, url} = await checkout(product, currency);
+    if (url) {
+      setMessage({message, severity: "success"});
+      window.location.href = url;
+    } else {
+      setMessage({message, severity: "error"})
     }
   }, [product, currency]);
   if (product) {
@@ -58,15 +39,16 @@ export default function ProductDetailPage() {
           <Button onClick={onCheckout}>Checkout with Ablr</Button>
         </div>
         <img height={640} alt={product.name} src={product.image} />
-        <Snackbar
+        {message && <Snackbar
+          anchorOrigin={{vertical: 'top', horizontal: 'center'}}
           open={Boolean(message)}
           autoHideDuration={2000}
           onClose={() => setMessage(null)}
         >
-          <Alert onClose={() => setMessage(null)} severity="error">
-            {message}
+          <Alert onClose={() => setMessage(null)} severity={message.severity}>
+            {message.message}
           </Alert>
-        </Snackbar>
+        </Snackbar> }
       </Container>
     );
   }

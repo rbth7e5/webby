@@ -103,6 +103,35 @@ export const getAmount = (currency: Currency, price: number): number => {
   }
 };
 
+export const checkout = async (product: Product | undefined, currency: Currency): Promise<{message: string, url?: string}> => {
+  if (product === undefined) {
+    return { message: "No product found" };
+  }
+  try {
+    const apiKey = prompt(`Please enter api key for ${currency}`);
+    const { success, data, message } = await postData(
+      "https://api.uat.ablr.com/api/v2/public/merchant/checkout/",
+      {
+        store_id: getStoreId(currency),
+        amount: getAmount(currency, product.price),
+      },
+      apiKey
+    );
+    if (success) {
+      const { checkout_url } = data;
+      return {message: "Checkout success", url: checkout_url}
+    } else {
+      if (message) {
+        return {message};
+      } else {
+        return {message: "Failed to checkout. Please try again later."};
+      }
+    }
+  } catch (error: any) {
+    return {message: error.message};
+  }
+}
+
 export const postData = async (
   url: string,
   data: object,
