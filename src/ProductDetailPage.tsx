@@ -13,12 +13,14 @@ export default function ProductDetailPage() {
   const currency = useContext(CurrencyContext);
   if (product) {
     return (
-      <Container>
-        <Button>Checkout with Ablr</Button>
-        <Typography>{product.name}</Typography>
-        <Typography>{renderPrice(product.price, currency)}</Typography>
-        <Typography>{product.description}</Typography>
-        <img alt={product.name} src={product.image}/>
+      <Container style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+        <div>
+          <Typography gutterBottom component="div" variant="h4">{product.name}</Typography>
+          <Typography gutterBottom>{renderPrice(product.price, currency)}</Typography>
+          <Typography gutterBottom>{product.description}</Typography>
+          <Button>Checkout with Ablr</Button>
+        </div>
+        <img height={640} alt={product.name} src={product.image}/>
       </Container>
     )
   }

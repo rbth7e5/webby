@@ -63,10 +63,10 @@ export const renderPrice = (price: number, currency: Currency): string => {
   const EXCHANGE_RATE = 3.1;
   switch (currency) {
     case Currency.MYR:
-      return `MYR ${price * EXCHANGE_RATE}`;
+      return `MYR ${price / 100 * EXCHANGE_RATE}`;
     case Currency.SGD:
-      return `SGD ${price}`;
+      return `SGD ${price / 100}`;
     default:
-      return `SGD ${price}`;
+      return `SGD ${price / 100}`;
   }
 }
