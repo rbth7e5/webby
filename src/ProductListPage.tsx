@@ -21,7 +21,7 @@ export default function ProductListPage() {
    }}>
     {products.map(product => (
       <Card>
-        <CardActionArea>
+        <CardActionArea style={{ height: '100%'}}>
           <CardMedia
             component="img"
             image={product.image}
