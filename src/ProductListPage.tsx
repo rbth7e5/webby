@@ -23,8 +23,8 @@ export default function ProductListPage() {
        rowGap: 16
      }}>
        {products.map(product => (
-         <Card>
-           <CardActionArea component={Link} to={`/product/${product.id}`} style={{ height: '100%'}}>
+         <Card component={Link} to={`/product/${product.id}`} >
+           <CardActionArea style={{ height: '100%'}}>
              <CardMedia
                component="img"
                image={product.image}
