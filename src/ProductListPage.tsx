@@ -22,7 +22,7 @@ export default function ProductListPage() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "auto auto auto",
+          gridTemplateColumns: "repeat(auto-fit, 372px)",
           columnGap: 16,
           rowGap: 16,
         }}

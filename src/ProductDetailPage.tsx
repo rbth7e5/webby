@@ -29,7 +29,11 @@ export default function ProductDetailPage() {
   if (product) {
     return (
       <Container
-        style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 560px))",
+          alignItems: "center",
+        }}
       >
         <div>
           <Typography gutterBottom component="div" variant="h4">
