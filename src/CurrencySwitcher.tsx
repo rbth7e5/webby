@@ -3,7 +3,7 @@ import Menu from "@mui/material/Menu"
 import {Currency} from "./types";
 import {DetailedHTMLProps, Dispatch, HTMLAttributes, MouseEvent, SetStateAction, useCallback, useState} from "react";
 import MenuItem from "@mui/material/MenuItem";
-import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
 
 type CountrySwitcherProps = {
   currency: Currency;
@@ -26,15 +26,17 @@ export default function CurrencySwitcher({ currency, setCurrency, ...divProps }:
   }, [])
   return (
     <div {...divProps}>
-      <Avatar style={{cursor: 'pointer'}} alt={currency} src={currencyToImgSrc[currency]} onClick={handleClickAvatar}/>
+      <Tooltip title="Change store">
+        <Avatar style={{cursor: 'pointer'}} alt={currency} src={currencyToImgSrc[currency]} onClick={handleClickAvatar}/>
+      </Tooltip>
       <Menu
         id="currency-menu"
         open={open}
         anchorEl={anchorEl}
         onClose={handleCloseMenu}
       >
-        <MenuItem onClick={() => onChooseCurrency(Currency.SGD)}>SGD</MenuItem>
-        <MenuItem onClick={() => onChooseCurrency(Currency.MYR)}>MYR</MenuItem>
+        <MenuItem onClick={() => onChooseCurrency(Currency.SGD)}>Singapore</MenuItem>
+        <MenuItem onClick={() => onChooseCurrency(Currency.MYR)}>Malaysia</MenuItem>
       </Menu>
     </div>
   )
