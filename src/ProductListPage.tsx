@@ -16,9 +16,10 @@ export default function ProductListPage() {
  const currency = useContext<Currency>(CurrencyContext);
  return (
    <Container>
+     <Typography gutterBottom variant="h4">Products</Typography>
      <div style={{
        display: 'grid',
-       gridTemplateColumns: 'auto auto auto auto',
+       gridTemplateColumns: 'auto auto auto',
        columnGap: 16,
        rowGap: 16
      }}>
