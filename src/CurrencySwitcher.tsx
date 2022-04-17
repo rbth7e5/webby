@@ -1,7 +1,7 @@
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu"
 import {Currency} from "./types";
-import {DetailedHTMLProps, Dispatch, HTMLAttributes, MouseEvent, SetStateAction, useState} from "react";
+import {DetailedHTMLProps, Dispatch, HTMLAttributes, MouseEvent, SetStateAction, useCallback, useState} from "react";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 
@@ -18,12 +18,12 @@ const currencyToImgSrc: Record<Currency, string> = {
 export default function CurrencySwitcher({ currency, setCurrency, ...divProps }: CountrySwitcherProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const handleClickAvatar = (event: MouseEvent<HTMLDivElement>) => setAnchorEl(event.currentTarget)
-  const handleCloseMenu = () => setAnchorEl(null);
-  const onChooseCurrency = (chosen: Currency) => {
+  const handleClickAvatar = useCallback((event: MouseEvent<HTMLDivElement>) => setAnchorEl(event.currentTarget), [])
+  const handleCloseMenu = useCallback(() => setAnchorEl(null), []);
+  const onChooseCurrency = useCallback((chosen: Currency) => {
     setCurrency(chosen);
     setAnchorEl(null);
-  }
+  }, [])
   return (
     <div {...divProps}>
       <Avatar style={{cursor: 'pointer'}} alt={currency} src={currencyToImgSrc[currency]} onClick={handleClickAvatar}/>
