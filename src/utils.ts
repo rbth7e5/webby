@@ -103,7 +103,10 @@ export const getAmount = (currency: Currency, price: number): number => {
   }
 };
 
-export const checkout = async (product: Product | undefined, currency: Currency): Promise<{message: string, url?: string}> => {
+export const checkout = async (
+  product: Product | undefined,
+  currency: Currency
+): Promise<{ message: string; url?: string }> => {
   if (product === undefined) {
     return { message: "No product found" };
   }
@@ -119,18 +122,18 @@ export const checkout = async (product: Product | undefined, currency: Currency)
     );
     if (success) {
       const { checkout_url } = data;
-      return {message: "Checkout success", url: checkout_url}
+      return { message: "Checkout success", url: checkout_url };
     } else {
       if (message) {
-        return {message};
+        return { message };
       } else {
-        return {message: "Failed to checkout. Please try again later."};
+        return { message: "Failed to checkout. Please try again later." };
       }
     }
   } catch (error: any) {
-    return {message: error.message};
+    return { message: error.message };
   }
-}
+};
 
 export const postData = async (
   url: string,
