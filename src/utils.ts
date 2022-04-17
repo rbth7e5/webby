@@ -94,9 +94,8 @@ export const getAmount = (currency: Currency, price: number): number => {
   }
 }
 
-export const postData = async (url: string, data: object) => {
-  const API_KEY = sessionStorage.getItem('key');
-  if (!API_KEY) {
+export const postData = async (url: string, data: object, apiKey: string | null) => {
+  if (!apiKey) {
     throw new Error('Unauthorised. Please try again later.')
   }
   console.log({data});
@@ -104,7 +103,7 @@ export const postData = async (url: string, data: object) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${API_KEY}`
+      'Authorization': `Bearer ${apiKey}`
     },
     body: JSON.stringify(data)
   })

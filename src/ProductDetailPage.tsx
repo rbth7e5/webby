@@ -19,10 +19,11 @@ export default function ProductDetailPage() {
       return;
     }
     try {
+      const apiKey = prompt(`Please enter api key for ${currency}`);
       const { success, data, message } = await postData('https://api.uat.ablr.com/api/v2/public/merchant/checkout/', {
         store_id: getStoreId(currency),
         amount: getAmount(currency, product.price),
-      })
+      }, apiKey)
       if (success) {
         const { checkout_url } = data;
         window.location.href = checkout_url;
