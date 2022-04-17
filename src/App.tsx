@@ -11,7 +11,7 @@ function App() {
   const [currency, setCurrency] = useState(Currency.SGD);
   return (
     <CurrencyContext.Provider value={currency}>
-      <CurrencySwitcher style={{position: 'absolute', top: 64, left: 64}} currency={currency} setCurrency={setCurrency} />
+      <CurrencySwitcher style={{zIndex: 1, position: 'absolute', top: 64, right: 64}} currency={currency} setCurrency={setCurrency} />
       <Routes>
         <Route path="/" element={<ProductListPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />}/>
