@@ -65,7 +65,7 @@ export const MOCK_PRODUCTS: Product[] = [
   },
 ];
 
-const EXCHANGE_RATE = 3.1;
+export const EXCHANGE_RATE = 3.1;
 
 export const renderPrice = (price: number, currency: Currency): string => {
   switch (currency) {
