@@ -9,6 +9,8 @@ We use Vite as a bundler under the hood.
 
 1. `npm run build`
 
+This will generate a `dist` folder which contains the build files.
+
 # Test
 
 Jest is used for tests.
