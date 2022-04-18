@@ -13,7 +13,7 @@ function App() {
   return (
     <CurrencyContext.Provider value={currency}>
       <CurrencySwitcher
-        style={{ zIndex: 1, position: "absolute", top: 64, right: 64 }}
+        style={{ zIndex: 1, position: "absolute", top: 32, right: 32 }}
         currency={currency}
         setCurrency={setCurrency}
       />
