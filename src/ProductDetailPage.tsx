@@ -8,6 +8,8 @@ import Button from "@mui/material/Button";
 import { checkout, renderPrice } from "./utils";
 import { CurrencyContext } from "./App";
 import { useCallback, useContext, useState } from "react";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function ProductDetailPage() {
   const [message, setMessage] = useState<{
@@ -16,8 +18,10 @@ export default function ProductDetailPage() {
   } | null>(null);
   const urlParams = useParams();
   const product = useProduct(urlParams.id ? +urlParams.id : undefined);
+  const [loading, setLoading] = useState(false);
   const currency = useContext(CurrencyContext);
   const onCheckout = useCallback(async () => {
+    setLoading(true);
     const { message, url } = await checkout(product, currency);
     if (url) {
       setMessage({ message, severity: "success" });
@@ -25,6 +29,7 @@ export default function ProductDetailPage() {
     } else {
       setMessage({ message, severity: "error" });
     }
+    setLoading(false);
   }, [product, currency]);
   if (product) {
     return (
@@ -58,6 +63,9 @@ export default function ProductDetailPage() {
             </Alert>
           </Snackbar>
         )}
+        <Backdrop open={loading}>
+          <CircularProgress color="inherit"/>
+        </Backdrop>
       </Container>
     );
   }
