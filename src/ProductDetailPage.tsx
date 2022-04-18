@@ -64,7 +64,7 @@ export default function ProductDetailPage() {
           </Snackbar>
         )}
         <Backdrop open={loading}>
-          <CircularProgress color="inherit"/>
+          <CircularProgress color="inherit" />
         </Backdrop>
       </Container>
     );
