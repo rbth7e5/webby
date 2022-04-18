@@ -28,7 +28,7 @@ export default function ProductListPage() {
         }}
       >
         {products.map((product) => (
-          <Card component={Link} to={`/product/${product.id}`}>
+          <Card component={Link} to={`/product/${product.id}`} style={{textDecoration: 'none'}}>
             <CardActionArea style={{ height: "100%" }}>
               <CardMedia
                 component="img"
